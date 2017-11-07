@@ -1,0 +1,178 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="css/px-modal-styles.html"/>
+
+<!--
+Element providing means to open and close an overlay modal dialog, with events and methods to capture when a button inside the modal is pressed.
+Both the modal trigger and the contents of the modal can be passed inside the `<px-modal>` tags.
+The trigger should have the class `modal-trigger` to ensure it doesn't appear inside of the modal itself.
+The `modalButtonClicked()` method can also be programmatically called on the modal to trigger it to open.
+
+### Usage
+
+    <px-modal modal-heading="Sign in required" btn-modal-positive="Sign In" btn-modal-negative="Back">
+      <button class="btn btn--primary modal-trigger">Launch Modal</button>
+      Lorem ipsum dolor sit amet.
+    </px-modal>
+
+    <px-modal modal-heading="Submit form?" btn-modal-positive="Submit" btn-modal-negative="Cancel">
+      <a href="javascript:void(0)" class="modal-trigger">Launch Modal</a>
+      Lorem ipsum dolor sit amet.
+    </px-modal>
+
+
+### Styling
+
+The following custom properties are available for styling:
+
+Custom property | Description
+:------------|:-------------
+`--px-modal-background-color`   | Background color of the modal dialog
+`--px-modal-overlay-color`   | Base color for the semi-opaque overlay
+`--px-modal-border-color`   | Color used for the separator line in the modal dialog
+
+In addition, the following mixins can be used to completely override the style of the modal component.
+
+Custom property | Description
+:------------|:-------------
+`--px-modal`   | Style mixin to be applied to the modal overlay (background layer)
+`--px-modal-content`   | Style mixin to be applied to the modal content box
+`--px-modal-title`   | Style mixin to be applied to the title of the modal content box
+`--px-modal-buttons`   | Style mixin to be applied to all of the buttons at the bottom of the overlay
+`--px-modal-positive-button`   | Style mixin to be applied specifically to the positive action button of the overlay
+
+@element px-modal
+@blurb Element providing means to open and close overlay modal with methods to capture action when modal is submitted.
+@homepage index.html
+@demo index.html
+-->
+<dom-module id="px-modal">
+  <template>
+    <style include="px-modal-styles"></style>
+
+    <div on-tap="modalButtonClicked">
+      <content select=".modal-trigger"></content>
+    </div>
+    <div class="modal flex flex--top flex--center full-height invisible" id="{{modalId}}" role="dialog" aria-labelledby$="{{modalIdTitle(modalId)}}">
+      <section class="modal__content" role=region>
+        <template is="dom-if" if="{{modalHeading}}">
+          <h3 id="{{modalIdTitle(modalId)}}" class="modal__title epsilon weight--normal">{{modalHeading}}</h3>
+        </template>
+        <slot></slot>
+        <div class="modal__buttons flex flex--right">
+          <div class=flex>
+            <template class="modal-toggle" is="dom-if" if="{{btnModalNegative}}" restamp>
+              <button type="button" on-click="modalActionButtonClicked" id="btnModalNegative" class="btn">{{btnModalNegative}}</button>
+            </template>
+            <template class="modal-toggle" is="dom-if" if="{{btnModalPositive}}" restamp>
+              <button type="button" on-click="modalActionButtonClicked" id="btnModalPositive" class$="btn {{_getClass(btnModalPositiveDisabled)}}">{{btnModalPositive}}</button>
+            </template>
+        </div>
+      </section>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-modal',
+
+    properties: {
+
+      /**
+       * Modal id string.
+       */
+      modalId: {
+        type: String,
+        value: 'myModal'
+      },
+
+      /**
+       * Header text for the modal window.
+       */
+      modalHeading: {
+        type: String
+      },
+
+      /**
+       * Text for button with positive action on modal.
+       */
+      btnModalPositive: {
+        type: String
+      },
+
+      /**
+       * Text for button with negative action on modal.
+       */
+      btnModalNegative: {
+        type: String
+      },
+
+      /**
+       * Name of the event that will be raised when the positive modal button is clicked.
+       */
+      btnModalPositiveClickedEventName: {
+        type: String,
+        value: "btnModalPositiveClicked"
+      },
+
+      /**
+       * Name of the event that will be raised when the negative modal button is clicked.
+       */
+      btnModalNegativeClickedEventName: {
+        type: String,
+        value: "btnModalNegativeClicked"
+      },
+      /**
+       * Flag to indicate if the positive button should be disabled within the modal.
+       */
+      btnModalPositiveDisabled: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      }
+
+    },
+    /**
+     * Returns the modal title + the string '-title'
+     */
+    modalIdTitle: function(modalTitle) {
+      return modalTitle + '-title';
+    },
+    /**
+     * Fires a positive or negative clicked event.
+     *
+     */
+    modalActionButtonClicked: function(evt){
+        if (evt.target.id === 'btnModalPositive'){
+          this.fire(this.btnModalPositiveClickedEventName);
+        }
+        else{
+          this.fire(this.btnModalNegativeClickedEventName);
+        }
+        this.modalButtonClicked(evt);
+    },
+    /**
+     * Sets visibility of the modal.
+     *
+     */
+    modalButtonClicked: function(evt){
+      var modalEle = this.$$("#" + this.modalId);
+      this.toggleClass('fadeout', !modalEle.classList.contains('invisible'), modalEle);
+      this.toggleClass('invisible', !modalEle.classList.contains('invisible'), modalEle);
+      document.body.style.overflow = (document.body.style.overflow === "hidden") ? "auto" : "hidden";
+      document.documentElement.style.overflow = (document.documentElement.style.overflow === "hidden") ? "auto" : "hidden";
+      // clean up by removing fadeout class so it doesn't show up again accidentally
+      window.setTimeout(function() {
+        this.toggleClass('fadeout', false, modalEle);
+      }.bind(this),300);
+    },
+    /**
+     * Gets the disabled class for the positive action button.
+     *
+     */
+    _getClass: function(){
+      return this.btnModalPositiveDisabled ? "btn--disabled" : "btn--call-to-action";
+    }
+  });
+</script>

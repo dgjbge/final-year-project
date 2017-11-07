@@ -41,10 +41,24 @@ html {
 }
 
 #sidebar {
-    position: relative;
+    position: absolute;
     top: 10%;
     left: 70%;
-    height: 90%;
-    border-top: 10px;
+    height: 85%;
+    border-bottom: 2px dotted black;
     width: 30%;
+    overflow-y: hidden;
+}
+
+#start-overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: dimgray;
+    z-index: 500;
+    opacity: 0.9;
+}
+
+#welcome-modal {
+    z-index: 1000;
 }

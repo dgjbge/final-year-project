@@ -1,6 +1,11 @@
-//TO-DO: develop sidebar, add borders, look at map stretch, simple click events, file loading
+//TO-DO: look at map stretch, simple click events, file loading
 
 'use strict';
+
+window.onload = function(){
+   const modal = document.getElementById('welcome-modal');
+   modal.modalButtonClicked();
+};
 
 let image = new ol.style.Circle({
     radius: 5,
