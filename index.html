@@ -6,31 +6,48 @@
     <link rel="stylesheet" href="https://openlayers.org/en/v4.4.2/css/ol.css" type="text/css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <link rel="import" href="/bower_components/px-modal/px-modal.html"/>
+    <link rel="import" href="/bower_components/px-file-upload/px-file-upload.html"/>
     <script src="https://openlayers.org/en/v4.4.2/build/ol.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="header">
-    <p id="header-text">Electric Grid Analysis</p>
+    <p id="header-text">Electric Grid Visualisation and Analysis</p>
 </div>
 <div id="map" class="map">
     <script src="index.js"></script>
 </div>
 
 <div id="sidebar">
-    Some text
+    <textarea name="infotext" id="infotext" disabled="disabled">This is the container for information relating to the current application view.
+    </textarea>
+    <div id="buttons">
+        <button id="features" onclick="hideFeatures()">Hide/Show Features</button>
+        <br/>
+        <button id="transformers">Show Transformers</button>
+        <br/>
+        <button id="cables">Show Cables</button>
+        <br/>
+        <button id="substations">Show Substations</button>
+    </div>
+</div>
+
+<div id="footer">
+    <p id="footer-text">Vladislav Romanov (University of Exeter)</p>
 </div>
 
 
 <px-modal
         id="welcome-modal"
-        btn-modal-positive="Continue"
-        modal-heading="Welcome to the Electric Grid Analysis web application">
-    <p>
-        <b>Press Continue to proceed</b>
-    </p>
+        modal-heading="Welcome to the Electric Grid Analysis web application"
+        btn-modal-positive="Upload">
+    <px-file-upload accept=".geojson"></px-file-upload>
 </px-modal>
 
-
+<px-modal
+        id="file-upload-modal"
+        modal-heading="Upload your GeoJSON file">
+        <!--<px-file-upload accept=".geojson"></px-file-upload>-->
+</px-modal>
 
 </body>
 

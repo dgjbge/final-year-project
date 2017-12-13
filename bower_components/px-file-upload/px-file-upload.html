@@ -1,0 +1,444 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-icon-set/px-icon-set.html"/>
+<link rel="import" href="../px-icon-set/px-icon.html"/>
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
+<link rel="import" href="css/px-file-upload-styles.html"/>
+
+<!--
+File upload component. Allows user to select one or more files from the file system by invoking the standard dialog, or by dragging and dropping files onto the target area, if supported by their browser.
+
+### Usage
+
+    <px-file-upload multiple disabled accept=".txt,text/html"></px-file-upload>
+
+### Styling
+
+The following custom properties are available for styling:
+
+Custom property | Description
+:----------------|:-------------
+`--px-file-upload-file-list-color` | Text color for the same of the selected file or 'No file selected' message
+`--px-file-upload-validation-color` | Text color for invalid file error message
+`--px-file-upload-dropzone-background-color` | Background color for the dropzone
+
+@element px-file-upload
+@blurb Drag-and-drop file upload component.
+@homepage index.html
+@demo index.html
+-->
+<dom-module id="px-file-upload">
+  <template>
+    <style include="px-file-upload-styles"></style>
+    <div id="file-upload-dropZone" class="file-upload-dropZone fieldset u-p-">
+      <div id=dndInstructions class$="{{_showHideDragAndDrop(_isAdvancedUpload, disabled)}} u-pb+"><px-icon class="file-upload-icon u-mr--" icon="px-utl:upload"></px-icon>[[localize(message)]]</div>
+      <template is="dom-if" if="{{multiple}}">
+        <div class="hidden file-upload-fileTable" id="fileTable">
+          <div class="file-upload-tr label">
+            <div class="file-upload-th">{{localize('Name')}}</div>
+            <div class="file-upload-th">{{localize('Size')}}</div>
+            <div class="file-upload-th">{{localize('Type')}}</div>
+            <div class="file-upload-th"></div>
+          </div>
+          <template is="dom-repeat" items="{{files}}">
+            <div class="file-upload-tr">
+              <div class="file-upload-td">{{item.name}}</div>
+              <div class="file-upload-td">{{_readableFileSize(item.size)}}</div>
+              <div class="file-upload-td">{{item.type}}</div>
+              <div class="file-upload-td"><px-icon id="icon{{index}}" icon="px-nav:close" class="file-upload-icon actionable actionable--secondary" on-click="_removeFile"></px-icon></div>
+            </div>
+          </template>
+        </div>
+      </template>
+      <label id="fileButton" class$="{{_disableUploadButton(disabled)}} btn u-mr--">{{localize('Choose File')}}
+        <input id="fileInput" name={{name}} disabled$="{{disabled}}" type="file" on-change="_fileChange" multiple={{multiple}} accept={{accept}} hidden></input>
+      </label>
+      <span id="fileList" class="file-upload-fileList">{{localize('No file selected')}}</span>
+      <span id="validation" class="file-upload-validation hidden"></span>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-file-upload',
+    /**
+    * use app-localize-behavior to realize internationalization
+    */
+    behaviors: [
+        Polymer.AppLocalizeBehavior
+    ],
+    properties: {
+    /**
+     * The message that shows up above the upload button.
+     * @type String
+     * @default "Drag and drop files here, or click the button below."
+     */
+      message: {
+        type: String,
+        value: "Drag and drop files here, or click the button below."
+      },
+      /**
+       * Comma-separated list of accepted file types, expressed as file extensions (".txt") and/or MIME types ("text/html"). Wildcards ("image/*") are currently not supported.
+       * @property accept
+       * @type String
+       * @default ""
+       */
+      accept: {
+        type: String,
+        value: ""
+      },
+      /**
+       * The form element name.
+       * @property name
+       * @type String
+       * @default ""
+       */
+      name: {
+        type: String,
+        value: ""
+      },
+      /**
+       * Indicates whether multiple files are allowed (true) or only a single file (false).
+       * @property multiple
+       * @type Boolean
+       * @default false
+       */
+      multiple: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * FileList array which stores information regarding the files to upload.
+       * Can be accessed in the same way as a plain file input element
+       * (<a href="https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications#Handling_the_upload_process_for_a_file" target=_blank>see MDN for more info</a>).
+       * @property files
+       * @type Object
+       * @default {}
+       */
+      files: {
+        type: Array,
+        value: function() {return [];}
+      },
+      /**
+       * Flag that disables the file upload field and prevents drag-and-drop or changing of selected files.
+       * @property disabled
+       * @type Boolean
+       * @default false
+       */
+      disabled: {
+        type: Boolean,
+        value: false,
+        observer: '_disable'
+      },
+      /**
+       * Checks whether the user's browser supports advanced drag and drop functionality.
+       * @property _isAdvancedUpload
+       * @type Boolean
+       * @default function
+       */
+      _isAdvancedUpload: {
+        type: Boolean,
+        value: function() {
+          var div = document.createElement('div');
+          return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+        }
+      },
+      /**
+       * A valid IETF language tag as a string that `px-localize-behavior` will
+       * use to localize this component. Refer to px-localize-behavior for currently supported languages.
+       *
+       * See https://github.com/PolymerElements/app-localize-behavior for API
+       * documentation and more information.
+       */
+      language: {
+        type: String,
+        value: 'en'
+      },
+      /**
+      * Use the key for localization if value for  language is missing. Should
+      * always be true for  our components
+      */
+      useKeyIfMissing: {
+        type: Boolean,
+        value: true
+      },
+      /**
+       * List of strings needing to be localized for this compoennt
+       */
+      resources: {
+        type: Object,
+        value: function() {
+          return {
+            'en': {
+             'Drag and drop files here, or click the button below.': 'Drag and drop files here, or click the button below.',
+             'Only one file is allowed.': 'Only one file is allowed.',
+             'Invalid file type.': 'Invalid file type.',
+             'No file selected': 'No file selected',
+             'Choose File': 'Choose File',
+             'Name': 'Name',
+             'Size': 'Size',
+             'Type': 'Type'
+            }
+          }
+        }
+      }
+    },
+
+    /**
+     * Ready function, enables the drag and drop area if the feature is supported.
+     *
+     * @method ready
+     */
+    ready: function() {
+      if(this._isAdvancedUpload && !this.disabled){
+        var dropZone = this.$.dropZone;
+        this.ondragover = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleClass("hover",true,dropZone);
+        }
+        this.ondragleave = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleClass("hover",false,dropZone);
+        }
+        this.ondrop = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleClass("hover",false,dropZone);
+          this.$.fileInput.files = e.dataTransfer.files;
+        }
+      }
+    },
+
+    /**
+     * Converts the FileList object to an array for usage in dom-repeat,
+     * this also allows us to remove individual files from the property,
+     * which is not supported by the fileList Object bound to the input.
+     *
+     * @method _toArray
+     * @param object
+     */
+    _toArray: function(obj) {
+      return  Object.keys(obj).reduce(function(accum, key) {
+        if (!isNaN(key)) {
+          accum.push(obj[key]);
+        }
+        return accum;
+      }, []);
+    },
+
+    /**
+     * Handles changes to the selected files.
+     *
+     * @method _fileChange
+     * @param event
+     */
+    _fileChange: function(e) {
+      this.files = this._toArray(e.target.files);
+
+      // Single file mode
+      if(!this.multiple) {
+        // Multiple files dropped, only one allowed
+        if(e.target.files.length > 1){
+          this.$$('#validation').innerHTML = this.localize("Only one file is allowed.");
+          this.toggleClass('hidden',false,this.$$('#validation'));
+          this.toggleClass('hidden',true,this.$$('#fileList'));
+          this.$.fileInput.value = "";
+          this.files = [];
+          this._notifyFilesChanged();
+          return;
+        }
+        if(this.accept !== "") {
+          // Invalid file type was dropped
+          if(!this._isValid(e.target.files[0])) {
+            this.$$('#validation').innerHTML = this.localize("Invalid file type.");
+            this.toggleClass('hidden',false,this.$$('#validation'));
+            this.toggleClass('hidden',true,this.$$('#fileList'));
+            this.$.fileInput.value = "";
+            this.files = [];
+            this._notifyFilesChanged();
+            return;
+          }
+        }
+      }
+      // Multiple file mode
+      else {
+        if(this.accept !== "") {
+          // Check each file against accepted file types
+          for(i = 0; i < e.target.files.length; i++) {
+            var file = e.target.files[i];
+            if(!this._isValid(file)) {
+              this.$$('#validation').innerHTML = this.localize("Invalid file type.");
+              this.toggleClass('hidden',false,this.$$('#validation'));
+              this.toggleClass('hidden',true,this.$$('#fileList'));
+              this.toggleClass('hidden',true,this.$$('#fileTable'));
+              this.$.fileInput.value = "";
+              this.files = [];
+              this._notifyFilesChanged();
+              return;
+            }
+          }
+        }
+      }
+
+      // Either accepted file types not specified or all checks above passed
+      this.$$('#validation').innerHTML = "";
+      this.toggleClass('hidden',true,this.$$('#validation'));
+
+      if (this.files.length === 0) {
+        this.$$('#fileList').innerHTML = this.localize('No file selected');
+        if(this.multiple) {
+          this.toggleClass('hidden',true,this.$$('#fileTable'));
+        }
+        this.toggleClass('hidden',false,this.$$('#fileList'));
+      }
+      else {
+        if(!this.multiple) {
+          var filesize = this._readableFileSize(this.files[0].size);
+          this.$$('#fileList').innerHTML = this.files[0].name + ' (' + filesize + ')';
+          this.toggleClass('hidden',false,this.$$('#fileList'));
+        }
+        else {
+          this.toggleClass('hidden',false,this.$$('#fileTable'));
+          this.toggleClass('hidden',true,this.$$('#fileList'));
+        }
+      }
+
+      this.toggleClass('hidden',true,this.$$('#validation'));
+      this._notifyFilesChanged();
+    },
+
+    /**
+     * Removes a file from the list when the corresponding icon is clicked
+     * and hides the header row of the table if the last file is removed.
+     * Also clears the hidden input to prevent a mismatch situation and to make
+     * sure that onChange gets called if the user chooses the same file again.
+     * Also fires the px-file-upload-files-changed event.
+     *
+     * @method _removeFile
+     * @param event
+     */
+    _removeFile: function(e) {
+      if(!this.disabled) {
+        this.splice("files",e.target.id.substring(4),1);
+        if(this.multiple && this.files.length === 0){
+          this.toggleClass('hidden',true,this.$$('#fileTable'));
+          this.toggleClass('hidden',false,this.$$('#fileList'));
+        }
+        this.$.fileInput.value = "";
+        this._notifyFilesChanged();
+      }
+    },
+
+    /**
+     * Removes any selected files and restores the file upload component to its default empty state.
+     * Also fires the px-file-upload-files-changed event.
+     *
+     * @method clear
+     */
+
+    clear: function() {
+      this.set('files', []);
+      this.$.fileInput.value = "";
+      this.$$('#fileList').innerHTML = this.localize('No file selected');
+      if(this.multiple) {
+        this.toggleClass('hidden',true,this.$$('#fileTable'));
+        this.toggleClass('hidden',false,this.$$('#fileList'));
+      }
+      this._notifyFilesChanged();
+    },
+
+    /**
+     * Disables the file upload component (button and hidden input) if the property is set.
+     *
+     * @method _disable
+     */
+   _disable: function() {
+     if(this.disabled !== undefined && this.multiple){
+       for(i = 0; i < this.files.length; i++) {
+         this.toggleClass('hidden',this.disabled,this.$$('#icon'+i));
+       }
+     }
+    },
+    /**
+     * Disable the upload button if disabled property is set to true
+     *
+     * @method _disableUploadButton
+     */
+    _disableUploadButton: function(disabled) {
+      if (!disabled) return '';
+      return 'btn--disabled';
+    },
+    /**
+     * Disable file upload input if disabled property is set to true
+     *
+     * @method _disableFileUpload
+     */
+    _disableFileUpload: function(disabled) {
+      if (!disabled) return '';
+      return 'disabled';
+    },
+    /**
+     * Hides the drag and drop zone if upload is disabled or drag and drop is not supported by the browser
+     *
+     * @method _showHideDragAndDrop
+     */
+    _showHideDragAndDrop: function(_isAdvancedUpload, disabled) {
+      if (_isAdvancedUpload && !disabled) return '';
+      return 'hidden';
+    },
+    /**
+     * Compares a file's type and extension to the accept property to validate.
+     *
+     * @method _isValid
+     * @param file
+     */
+    _isValid: function(file) {
+      var accept = this.accept;
+      if(file.type && this.accept.indexOf(file.type) > -1) {
+        return true;
+      }
+      else if(this.accept.indexOf(file.name.match(/\.[^\.]*$/)[0]) > -1) {
+        return true;
+      }
+      // TODO: need to figure out how to support wildcards like "image/*"
+      // Can use .match(/^[^\/]*\//)[0] to pull off first half of type string
+      else {
+        return false;
+      }
+    },
+
+    /**
+     * Converts bytes into a human-readable format.
+     *
+     * @method _readableFileSize
+     * @param bytes
+     */
+    _readableFileSize: function(bytes) {
+      var i = -1;
+      var units = [' KB',' MB',' GB'];
+      do {
+        bytes = bytes / 1024;
+        i++;
+      } while (bytes > 1024);
+      return Math.max(bytes,0.1).toFixed(1) + units[i];
+    },
+
+    /**
+     * Fires an event when selected file(s) are changed.
+     *
+     * @method _notifyFilesChanged
+     */
+     /**
+      * Event fired when selected file(s) are changed.
+      *
+      * @event px-file-upload-files-changed
+      */
+    _notifyFilesChanged: function() {
+      this.fire('px-file-upload-files-changed');
+    }
+
+  });
+</script>

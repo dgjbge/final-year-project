@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      px-file-upload Demo</title>
+    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+    <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <link rel="import" href="../px-theme/px-theme-styles.html">
+    <style include="px-theme-styles" is="custom-style"></style>
+
+    <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+    <link rel="import" href="px-file-upload.html" />
+    <style>
+      .container {
+        width: 100%;;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <h3>Demo</h3>
+    <div class="container">
+      <h5>Single File</h5>
+      <px-file-upload></px-file-upload>
+      <br/>
+      <h5>Multiple Files</h5>
+      <px-file-upload multiple></px-file-upload>
+      <br/>
+      <h5>Only "text/html" File</h5>
+      <px-file-upload accept=".html"></px-file-upload>
+      <br/>
+      <h5>Disabled</h5>
+      <px-file-upload disabled></px-file-upload>
+    </div>
+  </body>
+
+</html>
