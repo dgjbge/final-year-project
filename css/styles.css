@@ -23,7 +23,7 @@ button {
     background-color: black;
 }
 
-#features, #transformers, #cables, #substations {
+#transformers, #cables, #substations {
     left: 40%;
     position: relative;
     margin-bottom: 20px;
@@ -106,4 +106,17 @@ button {
 #file-upload-modal {
     display: none;
     z-index: 1000;
+}
+
+#network-info {
+    margin-top: 20px;
+}
+
+.info {
+    font-size: 14px;
+    font-family: "Times New Roman";
+    color: #45ace5;
+    position: relative;
+    left: 40%;
+    width: 50%;
 }

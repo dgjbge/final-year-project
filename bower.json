@@ -1,0 +1,15 @@
+{
+  "name": "final-year-project",
+  "main": "index.js",
+  "homepage": "https://github.com/vr237/final-year-project",
+  "authors": [
+    "Vladislav Romanov <vr237@exeter.ac.uk>"
+  ],
+  "description": "",
+  "license": "MIT",
+  "dependencies": {
+    "px-buttons-design": "^2.0.5",
+    "px-file-upload": "^1.2.0",
+    "px-modal": "2.0.8"
+  }
+}

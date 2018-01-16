@@ -44,7 +44,6 @@
     "commit": "691096771e58934cbe791560fe290edcf799c421"
   },
   "_source": "https://github.com/PredixDev/px-modal.git",
-  "_target": "^2.0.8",
-  "_originalSource": "https://github.com/PredixDev/px-modal.git",
-  "_direct": true
+  "_target": "2.0.8",
+  "_originalSource": "px-modal"
 }

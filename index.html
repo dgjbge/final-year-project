@@ -5,8 +5,8 @@
     <title>Electric Grid Visualisation and Analysis</title>
     <link rel="stylesheet" href="https://openlayers.org/en/v4.4.2/css/ol.css" type="text/css">
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
-    <link rel="import" href="/bower_components/px-modal/px-modal.html"/>
-    <link rel="import" href="/bower_components/px-file-upload/px-file-upload.html"/>
+    <link rel="import" href="bower_components/px-modal/px-modal.html"/>
+    <link rel="import" href="bower_components/px-file-upload/px-file-upload.html"/>
     <script src="https://openlayers.org/en/v4.4.2/build/ol.js" type="text/javascript"></script>
 </head>
 <body>
@@ -21,14 +21,20 @@
     <textarea name="infotext" id="infotext" disabled="disabled">The map on the left hand side is fully interactive and displays the GeoJSON data that you uploaded. The buttons below enable you to filter the data as and how you like.
     </textarea>
     <div id="buttons">
-        <button id="features" onclick="hideFeatures()">Hide/Show Features</button>
-        <br/>
         <button id="transformers">Show Transformers</button>
         <br/>
         <button id="cables">Show Cables</button>
         <br/>
         <button id="substations">Show Substations</button>
     </div>
+
+    <div id="network-info">
+        <p id="total-features" class="info"></p>
+        <p id="total-gen-stations" class="info"></p>
+        <p id="total-cables" class="info"></p>
+        <p id="total-service-points" class="info"></p>
+    </div>
+
 </div>
 
 <div id="footer">
@@ -41,12 +47,6 @@
         modal-heading="Welcome to the Electric Grid Analysis web application"
         btn-modal-positive="Upload">
     <px-file-upload accept=".geojson"></px-file-upload>
-</px-modal>
-
-<px-modal
-        id="file-upload-modal"
-        modal-heading="Upload your GeoJSON file">
-        <!--<px-file-upload accept=".geojson"></px-file-upload>-->
 </px-modal>
 
 </body>
