@@ -7,7 +7,52 @@
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <link rel="import" href="bower_components/px-modal/px-modal.html"/>
     <link rel="import" href="bower_components/px-file-upload/px-file-upload.html"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://openlayers.org/en/v4.4.2/build/ol.js" type="text/javascript"></script>
+    <style>
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 280px;
+        }
+        .ol-popup:after, .ol-popup:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+        .ol-popup:after {
+            border-top-color: white;
+            border-width: 10px;
+            left: 48px;
+            margin-left: -10px;
+        }
+        .ol-popup:before {
+            border-top-color: #cccccc;
+            border-width: 11px;
+            left: 48px;
+            margin-left: -11px;
+        }
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+        .ol-popup-closer:after {
+            content: "✖";
+        }
+    </style>
 </head>
 <body>
 <div id="header">
@@ -16,6 +61,72 @@
 <div id="map" class="map">
     <script src="index.js"></script>
 </div>
+
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+</div>
+<script>
+    /**
+     * Elements that make up the popup.
+     */
+    var container = document.getElementById('popup');
+    var content = document.getElementById('popup-content');
+    var closer = document.getElementById('popup-closer');
+
+
+    /**
+     * Create an overlay to anchor the popup to the map.
+     */
+    var overlay = new ol.Overlay({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+            duration: 250
+        }
+    });
+
+
+    /**
+     * Add a click handler to hide the popup.
+     * @return {boolean} Don't follow the href.
+     */
+    closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    };
+
+
+    /**
+     * Create the map.
+     */
+    const map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            }),
+        ],
+        overlays: [overlay],
+        target: 'map',
+        view: new ol.View({
+            center: ol.proj.transform([-3.5, 50.74], 'EPSG:4326', 'EPSG:3857'),
+            zoom: 13
+        })
+    });
+
+    /**
+     * Add a click handler to the map to render the popup.
+     */
+    map.on('click', function(e) {
+        let feature = map.forEachFeatureAtPixel(e.pixel, function(feat) {return feat;});
+
+        if(feature) {
+            content.innerHTML = '<p>Feature Type:</p>' + feature.get('type') + '<p>Feature ID:</p>' + feature.get('id');
+            overlay.setPosition(e.coordinate);
+        }
+    });
+</script>
 
 <div id="sidebar">
     <textarea name="infotext" id="infotext" disabled="disabled">The map on the left hand side is fully interactive and displays the GeoJSON data that you uploaded. The buttons below enable you to filter the data as and how you like.

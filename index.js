@@ -1,5 +1,3 @@
-//TO-DO: look at map stretch, simple click events, file loading
-
 'use strict';
 
 window.onload = function(){
@@ -18,56 +16,76 @@ window.onload = function(){
     });
 };
 
-let image = new ol.style.Circle({
-    radius: 5,
-    fill: null,
-    stroke: new ol.style.Stroke({color: 'black', width: 1})
-});
-
-const styles = {
-    'Point': new ol.style.Style({
-        image: image
-    }),
-    'LineString': new ol.style.Style({
-        stroke: new ol.style.Stroke({
-            color: 'green',
-            width: 2
-        })
-    }),
-    'MultiLineString': new ol.style.Style({
-        stroke: new ol.style.Stroke({
-            color: 'green',
-            width: 1
-        })
-    }),
-    'Circle': new ol.style.Style({
-        stroke: new ol.style.Stroke({
-            color: 'red',
-            width: 2
-        }),
-        fill: new ol.style.Fill({
-            color: 'black'
-        })
-    })
-};
-
+let styleCache = {};
 const styleFunction = function(feature) {
-    return styles[feature.getGeometry().getType()];
+    let featureType = feature.get('type');
+
+    if (!styleCache[featureType]) {
+        switch (featureType) {
+            case 'gen_station':
+                styleCache[featureType] = new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: 'svgs/factory.png'
+                    })
+                });
+                break;
+
+            case 'step_down_transformer':
+                styleCache[featureType] = new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        fill: null,
+                        stroke: new ol.style.Stroke({color: 'red', width: 2})
+                    })
+                });
+                break;
+
+            case 'step_up_transformer':
+                styleCache[featureType] = new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        fill: null,
+                        stroke: new ol.style.Stroke({color: 'blue', width: 2})
+                    })
+                });
+                break;
+
+            case 'trans_cable':
+                styleCache[featureType] = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'red',
+                        width: 2
+                    })
+                });
+                break;
+
+            case 'underground_cable':
+                styleCache[featureType] = new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'green',
+                        width: 2
+                    })
+                });
+                break;
+
+            case 'service_point':
+                styleCache[featureType] = new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: 'svgs/service-point.svg',
+                        scale: 0.05
+                    })
+                });
+                break;
+        }
+    }
+    return [styleCache[featureType]]
 };
 
 let geojsonObject;
 
 function validateFile() {
-    let currentFile;
-    let fileExtension;
-    if(document.querySelector('px-file-upload').files.length > 0) {
-         currentFile = document.querySelector('px-file-upload').files[0];
-
-        fileExtension = currentFile.name.split('.').pop();
-
-        if (fileExtension === 'geojson') {
-            document.getElementById('btnModalPositive').disabled = false;
-        }
+    if (document.querySelector('px-file-upload').files.length > 0) {
+        document.getElementById('btnModalPositive').disabled = false;
     } else {
         document.getElementById('btnModalPositive').disabled = true;
     }
@@ -87,18 +105,40 @@ function uploadFile() {
 
 }
 
-const map = new ol.Map({
+//popup code
+
+/*
+let popup = document.getElementById('popup');
+let popupInfo = document.getElementById('popup-info');
+let popupCloser = document.getElementById('closer');
+
+let overlay = new ol.Overlay({
+    element: popup,
+    autoPan: true,
+    autoPanAnimation: {
+        duration: 200
+    }
+});
+*/
+
+/*popupCloser.onclick = function() {
+    overlay.setPosition(undefined);
+    return false;
+};*/
+
+/*const map = new ol.Map({
     layers: [
         new ol.layer.Tile({
             source: new ol.source.OSM()
         }),
     ],
+    overlays: [overlay],
     target: 'map',
     view: new ol.View({
         center: ol.proj.transform([-3.5, 50.74], 'EPSG:4326', 'EPSG:3857'),
         zoom: 13
     })
-});
+});*/
 
 function createDataSource() {
     let vectorSource = new ol.source.Vector({
@@ -148,37 +188,15 @@ function generateInfo(vectorLayer) {
 
 }
 
-
-/*function hideFeatures() {
-    const features = vectorLayer.getSource().getFeatures();
-
-    features.forEach(function(feature) {
-        feature.style = {visibility: 'hidden'};
-    });
-    map.updateSize();
-}*/
-
-/*//modal code
-setTimeout(function() {
-    document.querySelector('#welcome-modal').addEventListener('btnModalPositiveClicked', function () {
-        setTimeout(function() {
-            document.querySelector('#file-upload-modal').style.display = 'block';
-        }, 500)
-    })
-}, 100);*/
-
 /*
-let element = document.getElementById('popup');
+map.on('click', function(e) {
+    let feature = map.forEachFeatureAtPixel(e.pixel, function(feat) {return feat;});
 
-let popup = new ol.Overlay({
-    element: element,
-    positioning: 'bottom-center',
-    stopEvent: false
-});
-
-map.addOverlay(popup);
-
-map.on('click', function(e) { //bind to map features
-    const coordinate = e.coordinate;
-    console.log(coordinate)
+    if(feature) {
+        console.log(popupInfo);
+        console.log(document.getElementById('popup-info'));
+        document.getElementById('popup-info').innerHTML = '<p>Feature Type:</p>' + feature.get('type');
+        console.log(overlay);
+        overlay.setPosition(e.coordinate);
+    }
 });*/

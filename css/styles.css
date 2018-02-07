@@ -120,3 +120,21 @@ button {
     left: 40%;
     width: 50%;
 }
+
+.map-popup {
+    position: absolute;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #cccccc;
+    bottom: 15px;
+    left: -50px;
+    min-width: 300px;
+}
+
+.map-popup-close {
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    content: 'X';
+}

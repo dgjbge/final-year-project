@@ -5,7 +5,41 @@
       "type": "Feature",
       "properties": {
         "type": "gen_station",
-        "id": "g001"
+        "id": "gen001"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.551850914955139,
+          50.73548413468525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "trans_cable",
+        "id": "tcab001"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.551850914955139,
+            50.73548413468525
+          ],
+          [
+            -3.5507190227508545,
+            50.73543999773759
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "step_up_transformer",
+        "id": "sut001"
       },
       "geometry": {
         "type": "Point",
@@ -19,7 +53,7 @@
       "type": "Feature",
       "properties": {
         "type": "trans_cable",
-        "id": "cab001"
+        "id": "tcab002"
       },
       "geometry": {
         "type": "LineString",
@@ -39,7 +73,7 @@
       "type": "Feature",
       "properties": {
         "type": "trans_cable",
-        "id": "cab002"
+        "id": "tcab003"
       },
       "geometry": {
         "type": "LineString",
@@ -58,8 +92,8 @@
     {
       "type": "Feature",
       "properties": {
-        "type": "step_down",
-        "id": "step001"
+        "type": "step_down_transformer",
+        "id": "sdt001"
       },
       "geometry": {
         "type": "Point",
@@ -73,7 +107,7 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable001"
+        "id": "ucab001"
       },
       "geometry": {
         "type": "LineString",
@@ -83,8 +117,8 @@
             50.7337118337839
           ],
           [
-            -3.5498768091201782,
-            50.73335193307209
+            -3.5498392581939697,
+            50.73333495655513
           ]
         ]
       }
@@ -93,13 +127,13 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp1"
+        "id": "sp001"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.5498768091201782,
-          50.73335193307209
+          -3.5498392581939697,
+          50.73333495655513
         ]
       }
     },
@@ -107,7 +141,7 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable002"
+        "id": "ucab002"
       },
       "geometry": {
         "type": "LineString",
@@ -117,8 +151,8 @@
             50.7337118337839
           ],
           [
-            -3.5500699281692505,
-            50.73316179573062
+            -3.550131618976593,
+            50.73315330743844
           ]
         ]
       }
@@ -126,20 +160,14 @@
     {
       "type": "Feature",
       "properties": {
-        "type": "underground_cable",
-        "id": "u_cable003"
+        "type": "service_point",
+        "id": "sp002"
       },
       "geometry": {
-        "type": "LineString",
+        "type": "Point",
         "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.5505259037017822,
-            50.733066726770446
-          ]
+          -3.550131618976593,
+          50.73315330743844
         ]
       }
     },
@@ -147,7 +175,7 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable003"
+        "id": "ucab003"
       },
       "geometry": {
         "type": "LineString",
@@ -157,8 +185,8 @@
             50.7337118337839
           ],
           [
-            -3.5507887601852417,
-            50.73308370338463
+            -3.550531268119812,
+            50.73309049402859
           ]
         ]
       }
@@ -166,20 +194,14 @@
     {
       "type": "Feature",
       "properties": {
-        "type": "underground_cable",
-        "id": "u_cable004"
+        "type": "service_point",
+        "id": "sp003"
       },
       "geometry": {
-        "type": "LineString",
+        "type": "Point",
         "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.5510408878326416,
-            50.733110865954515
-          ]
+          -3.550531268119812,
+          50.73309049402859
         ]
       }
     },
@@ -187,7 +209,7 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable005"
+        "id": "ucab004"
       },
       "geometry": {
         "type": "LineString",
@@ -197,8 +219,8 @@
             50.7337118337839
           ],
           [
-            -3.5504883527755733,
-            50.733508116739486
+            -3.5509094595909114,
+            50.73309728467156
           ]
         ]
       }
@@ -206,20 +228,14 @@
     {
       "type": "Feature",
       "properties": {
-        "type": "underground_cable",
-        "id": "u_cable006"
+        "type": "service_point",
+        "id": "sp004"
       },
       "geometry": {
-        "type": "LineString",
+        "type": "Point",
         "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.549104332923889,
-            50.73392913098803
-          ]
+          -3.5509094595909114,
+          50.73309728467156
         ]
       }
     },
@@ -227,7 +243,7 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable006"
+        "id": "ucab005"
       },
       "geometry": {
         "type": "LineString",
@@ -237,8 +253,8 @@
             50.7337118337839
           ],
           [
-            -3.5491204261779785,
-            50.7337457865385
+            -3.5506010055541988,
+            50.73355225550765
           ]
         ]
       }
@@ -246,20 +262,14 @@
     {
       "type": "Feature",
       "properties": {
-        "type": "underground_cable",
-        "id": "u_cable007"
+        "type": "service_point",
+        "id": "sp005"
       },
       "geometry": {
-        "type": "LineString",
+        "type": "Point",
         "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.5488736629486084,
-            50.73392234046567
-          ]
+          -3.5506010055541988,
+          50.73355225550765
         ]
       }
     },
@@ -267,7 +277,7 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable008"
+        "id": "ucab006"
       },
       "geometry": {
         "type": "LineString",
@@ -277,8 +287,8 @@
             50.7337118337839
           ],
           [
-            -3.5508960485458374,
-            50.733535279063275
+            -3.5511481761932373,
+            50.733608277730376
           ]
         ]
       }
@@ -286,20 +296,14 @@
     {
       "type": "Feature",
       "properties": {
-        "type": "underground_cable",
-        "id": "u_cable009"
+        "type": "service_point",
+        "id": "sp006"
       },
       "geometry": {
-        "type": "LineString",
+        "type": "Point",
         "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.5513949394226074,
-            50.733576022519415
-          ]
+          -3.5511481761932373,
+          50.733608277730376
         ]
       }
     },
@@ -307,7 +311,7 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable0010"
+        "id": "ucab007"
       },
       "geometry": {
         "type": "LineString",
@@ -317,8 +321,8 @@
             50.7337118337839
           ],
           [
-            -3.55057954788208,
-            50.733525093193705
+            -3.5516873002052307,
+            50.73345209439697
           ]
         ]
       }
@@ -326,8 +330,22 @@
     {
       "type": "Feature",
       "properties": {
+        "type": "service_point",
+        "id": "sp007"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5516873002052307,
+          50.73345209439697
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "type": "underground_cable",
-        "id": "u_cable0011"
+        "id": "ucab008"
       },
       "geometry": {
         "type": "LineString",
@@ -337,7 +355,755 @@
             50.7337118337839
           ],
           [
-            -3.5506707429885864,
+            -3.5518428683280945,
+            50.733205934825094
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp008"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5518428683280945,
+          50.733205934825094
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab009"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.55282187461853,
+            50.73368127628372
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp009"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.55282187461853,
+          50.73368127628372
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab010"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.55283260345459,
+            50.73394950254923
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp010"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.55283260345459,
+          50.73394950254923
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab011"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.5491150617599487,
+            50.7337763439966
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp011"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5491150617599487,
+          50.7337763439966
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "ucab012"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.549056053161621,
+            50.73393252624885
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp012"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.549056053161621,
+          50.73393252624885
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab013"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.5488548874855037,
+            50.73392403809635
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp013"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5488548874855037,
+          50.73392403809635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab014"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.5484901070594788,
+            50.7335335814185
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5484901070594788,
+          50.7335335814185
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab015"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.548455238342285,
+            50.73326365511669
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp015"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.548455238342285,
+          50.73326365511669
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab016"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549436926841736,
+            50.7337118337839
+          ],
+          [
+            -3.549179434776306,
+            50.73293261130209
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp016"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.549179434776306,
+          50.73293261130209
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "trans_cable",
+        "id": "tcab004"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549152612686157,
+            50.73478472893004
+          ],
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "step_down_transformer",
+        "id": "sdt002"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5531866550445557,
+          50.734499531352604
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab017"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.553554117679596,
+            50.734093800854104
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp017"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.553554117679596,
+          50.734093800854104
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab018"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.5534441471099854,
+            50.73394440965976
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp018"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5534441471099854,
+          50.73394440965976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab019"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.554310500621795,
+            50.734149822429146
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp019"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.554310500621795,
+          50.734149822429146
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab020"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.5539671778678894,
+            50.7340191053165
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp020"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5539671778678894,
+          50.7340191053165
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab021"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.554975688457489,
+            50.73418207724498
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp021"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.554981052875519,
+          50.73418547248746
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab022"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.554624319076538,
+            50.73389857362962
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp022"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.554624319076538,
+          50.73389857362962
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab023"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.555155396461487,
+            50.73399364090145
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp023"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.555155396461487,
+          50.73399364090145
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab024"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.5533395409584045,
+            50.73366599752618
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp024"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5533395409584045,
+          50.73366599752618
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab025"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.554407060146332,
+            50.73368127628372
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp025"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.554407060146332,
+          50.73368127628372
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab026"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5531866550445557,
+            50.734499531352604
+          ],
+          [
+            -3.5560566186904907,
+            50.73414642718407
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp026"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5560566186904907,
+          50.73414642718407
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "trans_cable",
+        "id": "tcab005"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.549152612686157,
+            50.73478472893004
+          ],
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "step_down_transformer",
+        "id": "std003"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.5552251338958736,
+          50.73298523893672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab027"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.555654287338257,
+            50.73262193728647
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "service_point",
+        "id": "sp027"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.555654287338257,
+          50.73262193728647
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab028"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.556002974510193,
             50.73346397792976
           ]
         ]
@@ -346,20 +1112,14 @@
     {
       "type": "Feature",
       "properties": {
-        "type": "underground_cable",
-        "id": "u_cable0012"
+        "type": "service_point",
+        "id": "sp028"
       },
       "geometry": {
-        "type": "LineString",
+        "type": "Point",
         "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.551630973815918,
-            50.73365411404461
-          ]
+          -3.556002974510193,
+          50.73346397792976
         ]
       }
     },
@@ -367,58 +1127,18 @@
       "type": "Feature",
       "properties": {
         "type": "underground_cable",
-        "id": "u_cable0013"
+        "id": "ucab029"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
           [
-            -3.549436926841736,
-            50.7337118337839
+            -3.5552251338958736,
+            50.73298523893672
           ],
           [
-            -3.5516738891601562,
-            50.733511512030844
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "underground_cable",
-        "id": "u_cable0014"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.551706075668335,
-            50.73330779411519
-          ]
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "underground_cable",
-        "id": "u_cable0015"
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            -3.549436926841736,
-            50.7337118337839
-          ],
-          [
-            -3.5520225763320923,
-            50.73316179573062
+            -3.5549676418304443,
+            50.73263212335247
           ]
         ]
       }
@@ -427,12 +1147,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp2"},
+        "id": "sp029"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.550118207931518,
-          50.73316519104706
+          -3.5549676418304443,
+          50.73263212335247
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab030"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5551393032073975,
+            50.7324419830891
+          ]
         ]
       }
     },
@@ -440,12 +1181,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp3"},
+        "id": "sp030"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.550536632537842,
-          50.73310747063415
+          -3.5551393032073975,
+          50.7324419830891
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab031"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5542917251586914,
+            50.73277133269873
+          ]
         ]
       }
     },
@@ -453,12 +1215,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp4"},
+        "id": "sp031"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.5507994890213013,
-          50.733080308062284
+          -3.5542917251586914,
+          50.73277133269873
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab032"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5545867681503296,
+            50.73306333144687
+          ]
         ]
       }
     },
@@ -466,12 +1249,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp5"},
+        "id": "sp032"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.5510462522506714,
-          50.73311426127465
+          -3.5545867681503296,
+          50.73306333144687
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab033"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.555477261543274,
+            50.732343517292236
+          ]
         ]
       }
     },
@@ -479,12 +1283,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp6"},
+        "id": "sp033"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.549109697341919,
-          50.7337457865385
+          -3.555477261543274,
+          50.732343517292236
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab034"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5563892126083374,
+            50.73268644900021
+          ]
         ]
       }
     },
@@ -492,12 +1317,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp7"},
+        "id": "sp034"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.5488736629486084,
-          50.73392573572698
+          -3.5563892126083374,
+          50.73268644900021
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab035"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.555654287338257,
+            50.73218053896674
+          ]
         ]
       }
     },
@@ -505,12 +1351,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp8"},
+        "id": "sp035"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.549104332923889,
-          50.73394271202982
+          -3.555654287338257,
+          50.73218053896674
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab036"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5563623905181885,
+            50.732211097445976
+          ]
         ]
       }
     },
@@ -518,12 +1385,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp9"},
+        "id": "sp036"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.551625609397888,
-          50.733657509325354
+          -3.5563623905181885,
+          50.732211097445976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab037"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.557086586952209,
+            50.732431796981786
+          ]
         ]
       }
     },
@@ -531,12 +1419,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp10"},
+        "id": "sp037"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.551684617996216,
-          50.733511512030844
+          -3.557086586952209,
+          50.732431796981786
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab038"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5569524765014644,
+            50.73220430667454
+          ]
         ]
       }
     },
@@ -544,12 +1453,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp11"},
+        "id": "sp038"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.551400303840637,
-          50.733586208377915
+          -3.5569524765014644,
+          50.73220430667454
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab039"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5551875829696655,
+            50.73364053291915
+          ]
         ]
       }
     },
@@ -557,12 +1487,33 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp12"},
+        "id": "sp039"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.5509121417999268,
-          50.733535279063275
+          -3.5551875829696655,
+          50.73364053291915
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "type": "underground_cable",
+        "id": "ucab040"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -3.5552251338958736,
+            50.73298523893672
+          ],
+          [
+            -3.5564804077148433,
+            50.73334514246605
+          ]
         ]
       }
     },
@@ -570,64 +1521,13 @@
       "type": "Feature",
       "properties": {
         "type": "service_point",
-        "id": "sp13"},
+        "id": "sp040"
+      },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -3.5506653785705566,
-          50.73347755910643
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "service_point",
-        "id": "sp14"},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.55057954788208,
-          50.733542069641764
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "service_point",
-        "id": "sp15"},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.550482988357544,
-          50.73351830261277
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "service_point",
-        "id": "sp16"},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.5517168045043945,
-          50.733321375337134
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "type": "service_point",
-        "id": "sp17"},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -3.5520386695861816,
-          50.73316858636325
+          -3.5564804077148433,
+          50.73334514246605
         ]
       }
     }
