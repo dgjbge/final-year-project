@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Component Test : Fixture for px-alert-message</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="../px-alert-message.html" />
+    <link rel="import" href="../bower_components/px-theme/px-theme-styles.html"/>
+  </head>
+
+  <body>
+    <custom-style>
+      <style include="px-theme-styles" is="custom-style"></style>
+    </custom-style>
+
+    <test-fixture id="PxBasicAlertMessage">
+      <template>
+        <px-alert-message
+          id="basicAlert"
+          type="error"
+          message-title="Well done!"
+          message="You successfully read this.">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxDismissAlertMessage">
+      <template>
+        <px-alert-message
+          id="basicAlert"
+          type="error"
+          message-title="Well done!"
+          action="dismiss"
+          message="You successfully read this.">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxDisableAutoShowAlertMessage">
+      <template>
+        <px-alert-message
+          id="basicAlert"
+          type="error"
+          message-title="Well done!"
+          action="dismiss"
+          disable-auto-show
+          message="You successfully read this.">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxAutoDismissAlert">
+      <template>
+        <px-alert-message
+          id="autoDismissAlert"
+          type="information"
+          message-title="Heads up!"
+          message="This definitely needs your attention."
+          action="https://www.gesoftware.com/predix"
+          auto-dismiss="1500">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxAutoDismissAlertShort">
+      <template>
+        <px-alert-message
+          type="information"
+          message-title="Heads up!"
+          message="This definitely needs your attention."
+          action="https://www.gesoftware.com/predix"
+          auto-dismiss="200">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxMultipleLanguageAlert">
+      <template>
+        <px-alert-message
+          id='multipleLanguageAlert'
+          type="custom"
+          language="zh-cn"
+          message-title="Custom Alert"
+          message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
+          action="https://www.gesoftware.com/predix">
+          <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxLongTitleAlert">
+      <template>
+        <px-alert-message
+          id='longTitleAlert'
+          type="information"
+          message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do."
+          message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
+          action="https://www.gesoftware.com/predix">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <px-alert-message
+      id='longTitleAlertStateful'
+      type="information"
+      message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do."
+      message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
+      action="https://www.gesoftware.com/predix">
+    </px-alert-message>
+
+    <px-alert-message
+        id='longMessageAlertStateful'
+        type="custom"
+        message-title="Custom Alert"
+        message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
+        action="https://www.gesoftware.com/predix">
+        <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;" />
+    </px-alert-message>
+
+    <px-alert-message
+        id="autoDismissAlertStateful"
+        type="information"
+        message-title="Heads up!"
+        message="This definitely needs your attention."
+        action="https://www.gesoftware.com/predix"
+        auto-dismiss="1500">
+    </px-alert-message>
+
+    <script src="px-alert-message-custom-tests.js"></script>
+    <script src="px-alert-message-truncation-tests.js"></script>
+    <script src="px-alert-message-dismiss-tests.js"></script>
+  </body>
+</html>

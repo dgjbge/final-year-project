@@ -23,7 +23,7 @@ button {
     background-color: black;
 }
 
-#transformers, #cables, #substations, #real-time-data-upload {
+#real-time-data-upload, #reset-network {
     left: 40%;
     position: relative;
     margin-bottom: 20px;
@@ -39,14 +39,10 @@ button {
     cursor: pointer;
 }
 
-#buttons {
-    margin-top: 20px;
-}
-
-#real-time-data-button {
+#real-time-data-buttons {
     position: absolute;
-    bottom: 5%;
     left: 25%;
+    margin-top: 25px;
 }
 
 #header {
@@ -114,7 +110,7 @@ button {
 }
 
 #network-info {
-    margin-top: 20px;
+    margin-top: 50%;
 }
 
 .info {
@@ -168,4 +164,53 @@ button {
 .ol-popup-closer:after {
     content: "✖";
     color: black;
+}
+
+px-alert-message {
+}
+
+#network-alert {
+    position: absolute;
+    z-index: 999;
+    left: 10%;
+    display: none;
+    width: 85%;
+}
+
+#action-alert, #real-time-alert {
+    position: absolute;
+    z-index: 999;
+    left: 50%;
+    display: none;
+    width: 40%;
+}
+
+#alert {
+    width: 100%;
+}
+
+px-slider {
+    left: 10%;
+    position: absolute;
+    width: 90%;
+}
+
+#slider-container {
+    position: absolute;
+    z-index: 999;
+    left: 30%;
+    visibility: hidden;
+    width: 50%;
+    height: 35px;
+    bottom: 5%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#play-button {
+    height: 30px;
+    width: 35px;
+    left: 10px;
+    top: 10%;
+    position: absolute;
+    cursor: pointer;
 }

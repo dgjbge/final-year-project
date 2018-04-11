@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./css/styles.css" type="text/css">
     <link rel="import" href="bower_components/px-modal/px-modal.html"/>
     <link rel="import" href="bower_components/px-file-upload/px-file-upload.html"/>
+    <link rel="import" href="bower_components/px-alert-message/px-alert-message.html"/>
+    <link rel="import" href="bower_components/px-slider/px-slider.html"/>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://openlayers.org/en/v4.4.2/build/ol.js" type="text/javascript"></script>
 
@@ -16,6 +18,38 @@
     <p id="header-text">Electric Grid Visualisation and Analysis</p>
 </div>
 <div id="map" class="map">
+    <px-alert-message
+            id="action-alert"
+            type="custom"
+            action="dismiss"
+            message-title="Information:"
+            message=""
+            hide-severity
+            hide-badge>
+    </px-alert-message>
+
+    <px-alert-message
+            id="real-time-alert"
+            type="custom"
+            action="dismiss"
+            message-title="Information:"
+            message=""
+            hide-severity
+            hide-badge>
+    </px-alert-message>
+
+    <div id="slider-container">
+        <img id="play-button" src="svgs/play-circle.svg" onclick="playData()"/>
+        <px-slider
+            min="0"
+            max="24"
+            step="1"
+            scale="linear"
+            show-labels
+            min-label-position="bottom"
+            max-label-position="bottom">
+        </px-slider>
+    </div>
     <script src="index.js"></script>
 </div>
 
@@ -63,6 +97,9 @@
 
         if(feature) {
             content.innerHTML = '<p>Feature Type: ' + feature.get('type') + '</p>' + '<p>Feature ID: ' + feature.get('id') + '</p>';
+            if(feature.get('realTimeData')) {
+                content.insertAdjacentHTML('beforeend', '<p>Real Time Data: ' + feature.get('realTimeData'));
+            }
             overlay.setPosition(e.coordinate);
         }
     });
@@ -82,12 +119,10 @@
 <div id="sidebar">
     <textarea name="infotext" id="infotext" disabled="disabled">The map on the left hand side is fully interactive and displays the GeoJSON data that you uploaded. The buttons below enable you to filter the data as and how you like.
     </textarea>
-    <div id="buttons">
-        <button id="transformers">Show Transformers</button>
+    <div id="real-time-data-buttons">
+        <button id="real-time-data-upload" onclick="realTimeDataUpload()">Upload Real-Time Data</button>
         <br/>
-        <button id="cables">Show Cables</button>
-        <br/>
-        <button id="substations">Show Substations</button>
+        <button id="reset-network" onclick="resetNetwork()">Reset Network</button>
     </div>
 
     <div id="network-info">
@@ -97,9 +132,14 @@
         <p id="total-service-points" class="info"></p>
     </div>
 
-    <div id="real-time-data-button">
-        <button id="real-time-data-upload" onclick="realTimeDataUpload()">Upload Real-Time Data</button>
-    </div>
+    <px-alert-message
+            id="network-alert"
+            type="information"
+            message-title="Current Data:"
+            message=""
+            hide-severity
+            hide-badge>
+    </px-alert-message>
 
 </div>
 
