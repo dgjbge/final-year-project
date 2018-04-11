@@ -9,50 +9,7 @@
     <link rel="import" href="bower_components/px-file-upload/px-file-upload.html"/>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://openlayers.org/en/v4.4.2/build/ol.js" type="text/javascript"></script>
-    <style>
-        .ol-popup {
-            position: absolute;
-            background-color: white;
-            -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #cccccc;
-            bottom: 12px;
-            left: -50px;
-            min-width: 280px;
-        }
-        .ol-popup:after, .ol-popup:before {
-            top: 100%;
-            border: solid transparent;
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-        }
-        .ol-popup:after {
-            border-top-color: white;
-            border-width: 10px;
-            left: 48px;
-            margin-left: -10px;
-        }
-        .ol-popup:before {
-            border-top-color: #cccccc;
-            border-width: 11px;
-            left: 48px;
-            margin-left: -11px;
-        }
-        .ol-popup-closer {
-            text-decoration: none;
-            position: absolute;
-            top: 2px;
-            right: 8px;
-        }
-        .ol-popup-closer:after {
-            content: "✖";
-        }
-    </style>
+
 </head>
 <body>
 <div id="header">
@@ -67,18 +24,12 @@
     <div id="popup-content"></div>
 </div>
 <script>
-    /**
-     * Elements that make up the popup.
-     */
-    var container = document.getElementById('popup');
-    var content = document.getElementById('popup-content');
-    var closer = document.getElementById('popup-closer');
 
+    const container = document.getElementById('popup');
+    const content = document.getElementById('popup-content');
+    const closer = document.getElementById('popup-closer');
 
-    /**
-     * Create an overlay to anchor the popup to the map.
-     */
-    var overlay = new ol.Overlay({
+    const overlay = new ol.Overlay({
         element: container,
         autoPan: true,
         autoPanAnimation: {
@@ -86,11 +37,6 @@
         }
     });
 
-
-    /**
-     * Add a click handler to hide the popup.
-     * @return {boolean} Don't follow the href.
-     */
     closer.onclick = function() {
         overlay.setPosition(undefined);
         closer.blur();
@@ -98,9 +44,6 @@
     };
 
 
-    /**
-     * Create the map.
-     */
     const map = new ol.Map({
         layers: [
             new ol.layer.Tile({
@@ -115,15 +58,23 @@
         })
     });
 
-    /**
-     * Add a click handler to the map to render the popup.
-     */
     map.on('click', function(e) {
         let feature = map.forEachFeatureAtPixel(e.pixel, function(feat) {return feat;});
 
         if(feature) {
-            content.innerHTML = '<p>Feature Type:</p>' + feature.get('type') + '<p>Feature ID:</p>' + feature.get('id');
+            content.innerHTML = '<p>Feature Type: ' + feature.get('type') + '</p>' + '<p>Feature ID: ' + feature.get('id') + '</p>';
             overlay.setPosition(e.coordinate);
+        }
+    });
+
+    map.on("pointermove", function(e) {
+        const hover = this.forEachFeatureAtPixel(e.pixel, function() {
+            return true;
+        });
+        if (hover) {
+            this.getTargetElement().style.cursor = 'pointer';
+        } else {
+            this.getTargetElement().style.cursor = '';
         }
     });
 </script>
@@ -146,6 +97,10 @@
         <p id="total-service-points" class="info"></p>
     </div>
 
+    <div id="real-time-data-button">
+        <button id="real-time-data-upload" onclick="realTimeDataUpload()">Upload Real-Time Data</button>
+    </div>
+
 </div>
 
 <div id="footer">
@@ -158,6 +113,13 @@
         modal-heading="Welcome to the Electric Grid Analysis web application"
         btn-modal-positive="Upload">
     <px-file-upload accept=".geojson"></px-file-upload>
+</px-modal>
+
+<px-modal
+        id="real-time-data-modal"
+        modal-heading="Upload your network's real-time JSON data"
+        btn-modal-positive="Upload">
+    <px-file-upload accept=".json"></px-file-upload>
 </px-modal>
 
 </body>
