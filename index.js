@@ -13,7 +13,7 @@ window.onload = function(){
     modal.addEventListener('btnModalPositiveClicked', function() {
         uploadFile();
     });
-    document.querySelector('#reset-network').style.cursor = 'not-allowed';
+    document.getElementById('reset-network').style.cursor = 'not-allowed';
 };
 
 let styleCache = {};
@@ -122,8 +122,8 @@ function createDataSource() {
     map.addLayer(vectorLayer);
     map.getView().fit(vectorSource.getExtent(), map.getSize());
 
-    document.querySelector('#action-alert').style.display = 'block';
-    document.querySelector('#action-alert').message = 'The GeoJSON network file has been uploaded successfully. Now you ' +
+    document.getElementById('action-alert').style.display = 'block';
+    document.getElementById('action-alert').message = 'The GeoJSON network file has been uploaded successfully. Now you ' +
         'can interact with the map and its features, as well as view generic network information in the sidebar. If ' +
         'you have a JSON file with real-time data, you can upload it using the Upload Real-Time Data button.';
     generateInfo(vectorLayer);
@@ -177,8 +177,8 @@ function uploadRealTimeData() {
         realTimeContents = e.target.result;
         realTimeData = JSON.parse(realTimeContents);
         linkRealTimeData(realTimeData);
-        document.querySelector('#real-time-data-upload').disabled = true;
-        document.querySelector('#real-time-data-upload').style.cursor = 'not-allowed';
+        document.getElementById('real-time-data-upload').disabled = true;
+        document.getElementById('real-time-data-upload').style.cursor = 'not-allowed';
     };
 
     reader.readAsText(file, 'UTF-8');
@@ -194,11 +194,11 @@ function linkRealTimeData(data) {
             feature.set('realTimeData', realTimeReadings['readings']);
         }
     });
-    document.querySelector('#slider-container').style.visibility = 'visible';
+    document.getElementById('slider-container').style.visibility = 'visible';
     document.querySelector('px-slider').disabled = true;
 
-    document.querySelector('#real-time-alert').style.display = 'block';
-    document.querySelector('#real-time-alert').message = 'The real-time network readings have been uploaded and linked ' +
+    document.getElementById('real-time-alert').style.display = 'block';
+    document.getElementById('real-time-alert').message = 'The real-time network readings have been uploaded and linked ' +
         'to the static network successfully. You may now play through the data and see how the network changes. The ' +
         'slider at the bottom of the map can be used to go to specific hours in the day, and the Reset Network button ' +
         'can be used to return the network to its original state';
@@ -228,12 +228,12 @@ const underloadedCableStyle = new ol.style.Style({
 
 function playData() {
     const networkFeatures = vectorLayer.getSource().getFeatures();
-    const alertMessage = document.querySelector('#network-alert');
+    const alertMessage = document.getElementById('network-alert');
     const slider = document.querySelector('px-slider');
     slider.disabled = false;
     alertMessage.style.display = 'block';
-    document.querySelector('#reset-network').disabled = true;
-    document.querySelector('#reset-network').style.cursor = 'not-allowed';
+    document.getElementById('reset-network').disabled = true;
+    document.getElementById('reset-network').style.cursor = 'not-allowed';
 
     for(let i = 0; i < 25; i++){
         setTimeout(function() {
@@ -253,8 +253,8 @@ function playData() {
             });
 
             if(i === 24) {
-                document.querySelector('#reset-network').disabled = false;
-                document.querySelector('#reset-network').style.cursor = 'pointer';
+                document.getElementById('reset-network').disabled = false;
+                document.getElementById('reset-network').style.cursor = 'pointer';
             }
         }, 2000*i);
     }
@@ -265,7 +265,9 @@ function playData() {
 
 function updateNetwork(hour) {
     const networkFeatures = vectorLayer.getSource().getFeatures();
-    document.querySelector('#network-alert').message = 'Current hour: ' + hour + ' | Average current voltage: ' + calculateAverageVoltage(hour) + 'kV.';
+    document.getElementById('network-alert').message = 'Current hour: ' + hour + ' | Average current voltage: ' +
+        calculateAverageVoltage(hour) + 'kV.';
+
     networkFeatures.forEach(function(feature) {
         if(feature.get('type') === 'underground_cable' && feature.get('realTimeData')) {
             const reading = feature.get('realTimeData')[hour];
@@ -282,7 +284,7 @@ function updateNetwork(hour) {
 
 function resetNetwork() {
     const networkFeatures = vectorLayer.getSource().getFeatures();
-    const alertMessage = document.querySelector('#network-alert');
+    const alertMessage = document.getElementById('network-alert');
 
     networkFeatures.forEach(function(feature) {
         if(feature.get('type') === 'underground_cable') {
