@@ -1,0 +1,2 @@
+{"service_point":41,"trans_cable":5,"step_up_transformer":1,"underground_cable":39,"step_down_transformer":3,"gen_station":1}
+Average voltages over 24 hours (kV): 10,10,10,10,13,14,17,21,26,27,27,28,28,29,28,28,27,28,29,30,30,29,22,20,15

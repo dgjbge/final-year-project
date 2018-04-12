@@ -169,7 +169,9 @@
 </script>
 
 <div id="sidebar">
-    <textarea name="infotext" id="infotext" disabled="disabled">The map on the left hand side is fully interactive and displays the GeoJSON data that you uploaded. The buttons below enable you to filter the data as and how you like.
+    <textarea name="infotext" id="infotext" disabled="disabled">The map on the left hand side is fully interactive and displays the GeoJSON data that has been uploaded. The legend on the top-left of the map shows the various parts of the network.
+
+        Generic information about the network can be found further down in the sidebar. Real-time JSON data for the network can be uploaded via the Upload Real-Time Data button below.
     </textarea>
     <div id="real-time-data-buttons">
         <button id="real-time-data-upload" onclick="realTimeDataUpload()">Upload Real-Time Data</button>
@@ -192,6 +194,14 @@
             hide-severity
             hide-badge>
     </px-alert-message>
+
+    <div id="network-log-button">
+        <button id="network-log" onclick="generateNetworkInformation()">Generate Network Log</button>
+        <br/>
+    </div>
+    <div id="log-text">
+        <p id="network-info-text">Click <a download="networkInfo.txt" id="downloadlink" onclick="hideLogText()">here</a> to download the Network log</p>
+    </div>
 
 </div>
 

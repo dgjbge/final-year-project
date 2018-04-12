@@ -258,6 +258,7 @@ function playData() {
             if(i === 24) {
                 document.getElementById('reset-network').disabled = false;
                 document.getElementById('reset-network').style.cursor = 'pointer';
+                document.getElementById('network-log-button').style.display = 'block';
             }
         }, 2000*i);
     }
@@ -315,4 +316,44 @@ function calculateAverageVoltage(hour) {
 
 function closeLegend(legend) {
     document.getElementById(legend).style.display = 'none';
+}
+
+function generateNetworkInformation() {
+    let infoString = '';
+    const networkFeatures = vectorLayer.getSource().getFeatures();
+    let uniqueFeatures = {};
+    networkFeatures.forEach(function(feature) {
+        if(uniqueFeatures.hasOwnProperty(feature.get('type'))) {
+            uniqueFeatures[feature.get('type')] += 1;
+        } else {
+            uniqueFeatures[feature.get('type')] = 1;
+        }
+    });
+
+    infoString += JSON.stringify(uniqueFeatures);
+
+    let averageVoltages = [];
+    for(let i = 0; i<25; i++) {
+        let averageNetworkVoltage = calculateAverageVoltage(i);
+        averageVoltages.push(averageNetworkVoltage);
+    }
+
+    infoString += '\r\n' + 'Average voltages over 24 hours (kV): ' + averageVoltages;
+
+    generateNetworkLogFile(infoString)
+}
+function generateNetworkLogFile(text) {
+    const data = new Blob([text], {type: 'text/plain'});
+    let file = null;
+
+    file = window.URL.createObjectURL(data);
+
+    const link = document.getElementById('downloadlink');
+    link.href = file;
+    document.getElementById('network-info-text').style.display = 'block';
+
+}
+
+function hideLogText() {
+    document.getElementById('network-info-text').style.display = 'none'
 }

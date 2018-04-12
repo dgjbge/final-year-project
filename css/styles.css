@@ -23,7 +23,7 @@ button {
     background-color: black;
 }
 
-#real-time-data-upload, #reset-network {
+#real-time-data-upload, #reset-network, #network-log {
     left: 40%;
     position: relative;
     margin-bottom: 20px;
@@ -39,10 +39,25 @@ button {
     cursor: pointer;
 }
 
-#real-time-data-buttons {
+#real-time-data-buttons, #network-log-button {
     position: absolute;
     left: 25%;
     margin-top: 25px;
+}
+
+#network-log-button {
+    display: none;
+    bottom: 5%;
+}
+
+#network-info-text {
+    display: none;
+}
+
+#log-text {
+    left: 30%;
+    position: absolute;
+    bottom: 0;
 }
 
 #header {
@@ -63,7 +78,7 @@ button {
 }
 
 #infotext {
-    height: 100px;
+    height: 180px;
     width: 70%;
     position: relative;
     left: 15%;
