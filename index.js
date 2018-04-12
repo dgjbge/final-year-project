@@ -126,6 +126,7 @@ function createDataSource() {
     document.getElementById('action-alert').message = 'The GeoJSON network file has been uploaded successfully. Now you ' +
         'can interact with the map and its features, as well as view generic network information in the sidebar. If ' +
         'you have a JSON file with real-time data, you can upload it using the Upload Real-Time Data button.';
+    document.getElementById('network-legend').style.display = 'block';
     generateInfo(vectorLayer);
 }
 
@@ -234,6 +235,8 @@ function playData() {
     alertMessage.style.display = 'block';
     document.getElementById('reset-network').disabled = true;
     document.getElementById('reset-network').style.cursor = 'not-allowed';
+    closeLegend('network-legend');
+    document.getElementById('real-time-legend').style.display = 'block';
 
     for(let i = 0; i < 25; i++){
         setTimeout(function() {
@@ -310,3 +313,6 @@ function calculateAverageVoltage(hour) {
     return Math.round(voltageSum / voltageValues.length);
 }
 
+function closeLegend(legend) {
+    document.getElementById(legend).style.display = 'none';
+}
