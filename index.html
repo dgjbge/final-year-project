@@ -154,9 +154,13 @@
             }
             overlay.setPosition(e.coordinate);
         }
+
+        if(feature && feature.get('type') === 'step_down_transformer') {
+            runConnectivityAnalysis(feature, 'click');
+        }
     });
 
-    map.on("pointermove", function(e) {
+    map.on('pointermove', function(e) {
         const hover = this.forEachFeatureAtPixel(e.pixel, function() {
             return true;
         });
@@ -166,6 +170,7 @@
             this.getTargetElement().style.cursor = '';
         }
     });
+
 </script>
 
 <div id="sidebar">

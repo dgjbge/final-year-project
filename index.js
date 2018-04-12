@@ -322,7 +322,15 @@ function generateNetworkInformation() {
     let infoString = '';
     const networkFeatures = vectorLayer.getSource().getFeatures();
     let uniqueFeatures = {};
+    let stepDownTransformers = [];
+    let stepDownTransformerIDs = [];
+    let connectivityObject = {};
+
     networkFeatures.forEach(function(feature) {
+        if(feature.get('type') === 'step_down_transformer') {
+            stepDownTransformers.push(feature);
+            stepDownTransformerIDs.push(feature.get('id'));
+        }
         if(uniqueFeatures.hasOwnProperty(feature.get('type'))) {
             uniqueFeatures[feature.get('type')] += 1;
         } else {
@@ -330,7 +338,20 @@ function generateNetworkInformation() {
         }
     });
 
-    infoString += JSON.stringify(uniqueFeatures);
+    infoString += 'All unique network features:';
+
+    Object.keys(uniqueFeatures).forEach(function(key) {
+        infoString += '\r\n' + key + ': ' + uniqueFeatures[key];
+    });
+
+    stepDownTransformers.forEach(function(transformer, index) {
+        connectivityObject[stepDownTransformerIDs[index]] = runConnectivityAnalysis(transformer, 'info');
+    });
+
+    infoString += '\r\n\r\n' + 'Connectivity analysis for the network\'s Step-Down Transformers:';
+    Object.keys(connectivityObject).forEach(function(key) {
+        infoString += '\r\n' + key + ': ' + connectivityObject[key];
+    });
 
     let averageVoltages = [];
     for(let i = 0; i<25; i++) {
@@ -338,7 +359,7 @@ function generateNetworkInformation() {
         averageVoltages.push(averageNetworkVoltage);
     }
 
-    infoString += '\r\n' + 'Average voltages over 24 hours (kV): ' + averageVoltages;
+    infoString += '\r\n\r\n' + 'Average voltages over 24 hours (kV): ' + averageVoltages;
 
     generateNetworkLogFile(infoString)
 }
@@ -356,4 +377,37 @@ function generateNetworkLogFile(text) {
 
 function hideLogText() {
     document.getElementById('network-info-text').style.display = 'none'
+}
+
+const connectedStyle = new ol.style.Style({
+    stroke: new ol.style.Stroke({
+        color: 'yellow',
+        width: 2
+    })
+});
+
+function runConnectivityAnalysis(transformer, usage) {
+    const networkFeatures = vectorLayer.getSource().getFeatures();
+    const transformerLocation = transformer.getGeometry().getCoordinates();
+    const transformerLonLat = ol.proj.transform(transformerLocation, 'EPSG:3857', 'EPSG:4326');
+    let connectedCables = [];
+
+    networkFeatures.forEach(function(feature) {
+        if(feature.get('type') === 'underground_cable') {
+            let cableStart = feature.getGeometry().getCoordinates()[0];
+            cableStart =  ol.proj.transform(cableStart, 'EPSG:3857', 'EPSG:4326');
+
+            if(cableStart[0] === transformerLonLat[0] && cableStart[1] === transformerLonLat[1]) {
+                if(usage === 'click') {
+                    feature.setStyle(connectedStyle);
+                    setTimeout(function() {
+                        feature.setStyle(normalCableStyle);
+                    }, 5000);
+                } else {
+                    connectedCables.push(feature.get('id'));
+                }
+            }
+        }
+    });
+    return connectedCables;
 }

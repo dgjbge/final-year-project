@@ -1,2 +1,14 @@
-{"service_point":41,"trans_cable":5,"step_up_transformer":1,"underground_cable":39,"step_down_transformer":3,"gen_station":1}
+All unique network features:
+service_point: 41
+trans_cable: 5
+step_up_transformer: 1
+underground_cable: 39
+step_down_transformer: 3
+gen_station: 1
+
+Connectivity analysis for the network's Step-Down Transformers:
+sdt001: ucab011,ucab013,ucab014,ucab005,ucab006,ucab010,ucab009,ucab001,ucab007,ucab002,ucab008,ucab015,ucab016,ucab003,ucab004
+sdt002: ucab017,ucab018,ucab024,ucab019,ucab021,ucab023,ucab020,ucab026,ucab025,ucab022
+std003: ucab032,ucab039,ucab029,ucab031,ucab030,ucab033,ucab035,ucab028,ucab040,ucab037,ucab027,ucab034,ucab036,ucab038
+
 Average voltages over 24 hours (kV): 10,10,10,10,13,14,17,21,26,27,27,28,28,29,28,28,27,28,29,30,30,29,22,20,15
