@@ -12,6 +12,7 @@
     "px-file-upload": "^1.2.0",
     "px-modal": "2.0.8",
     "px-alert-message": "^1.3.3",
-    "px-slider": "^2.2.2"
+    "px-slider": "^2.2.2",
+    "px-spinner": "^2.2.2"
   }
 }
