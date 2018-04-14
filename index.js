@@ -96,7 +96,7 @@ const styleFunction = function(feature) {
 //A function to generate generic network information in the application's sidebar
 function generateInfo(vectorLayer) {
     const numberOfFeatures = vectorLayer.getSource().getFeatures().length;
-    document.getElementById('total-features').innerHTML = "Total Features: " + numberOfFeatures;
+    document.getElementById('total-features').innerHTML = `Total Features: ${numberOfFeatures}`;
     const networkFeatures = geojsonObject.features;
     let servicePointCounter = 0;
     let cableCounter = 0;
@@ -119,9 +119,9 @@ function generateInfo(vectorLayer) {
         }
     });
 
-    document.getElementById('total-service-points').innerHTML = "Total Service Points: " + servicePointCounter;
-    document.getElementById('total-cables').innerHTML = "Total Cables: " + cableCounter;
-    document.getElementById('total-gen-stations').innerHTML = "Total Generating Stations: " + stationCounter;
+    document.getElementById('total-service-points').innerHTML = `Total Service Points: ${servicePointCounter}`;
+    document.getElementById('total-cables').innerHTML = `Total Cables: ${cableCounter}`;
+    document.getElementById('total-gen-stations').innerHTML = `Total Generating Stations: ${stationCounter}`;
 }
 
 //This function uses the GeoJSON stored in the geojsonObject by uploadFile() to put features on the Openlayers map
@@ -163,16 +163,13 @@ function validateFile() {
 function uploadFile() {
     const file = document.querySelector('px-file-upload').files[0];
     const reader = new FileReader();
-    let fileContents;
 
     reader.onload = function(e) {
-        fileContents = e.target.result;
+        const fileContents = e.target.result;
         geojsonObject = JSON.parse(fileContents);
         createDataSource();
     };
-
     reader.readAsText(file, 'UTF-8');
-
 }
 
 //A function to link the real-time JSON data to the static GeoJSON network. If a feature has real-time data,
@@ -334,7 +331,7 @@ function playData() {
     //styles updated based on their voltage reading at the current hour.
     for(let i = 0; i < 25; i++){
         setTimeout(function() { //setTimeout is used here to update the map every 2 seconds.
-            alertMessage.message = 'Current hour: ' + i + ' | Average current voltage: ' + calculateAverageVoltage(i) + 'kV.';
+            alertMessage.message = `Current hour: ${i} | Average current voltage: ${calculateAverageVoltage(i)} kV.`;
             slider.value = i;
 
             networkFeatures.forEach(function(feature) {
@@ -457,7 +454,7 @@ function generateNetworkInformation() {
 
     //Appending all unique network features and their quantities to the information string
     Object.keys(uniqueFeatures).forEach(function(key) {
-        infoString += '\r\n' + key + ': ' + uniqueFeatures[key];
+        infoString += `\r\n ${key}: ${uniqueFeatures[key]}`;
     });
 
     //A connectivity analysis is ran for each step-down transformer in the network, with the analysis result being
@@ -469,7 +466,7 @@ function generateNetworkInformation() {
     //The contents of the connectivityObject are appended to the information string
     infoString += '\r\n\r\n' + 'Connectivity analysis for the network\'s Step-Down Transformers:';
     Object.keys(connectivityObject).forEach(function(key) {
-        infoString += '\r\n' + key + ': ' + connectivityObject[key];
+        infoString += `\r\n ${key}: ${connectivityObject[key]}`;
     });
 
     //Average voltages for each hour are calculated and stored in the averageVoltages array below. The result is then
@@ -480,7 +477,7 @@ function generateNetworkInformation() {
         averageVoltages.push(averageNetworkVoltage);
     }
 
-    infoString += '\r\n\r\n' + 'Average voltages over 24 hours (kV): ' + averageVoltages;
+    infoString += `\r\n\r\n Average voltages over 24 hours (kV): ${averageVoltages}`;
 
     //Now that the information string has been created, the network log file can be created.
     generateNetworkLogFile(infoString)
