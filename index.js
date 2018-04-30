@@ -24,10 +24,9 @@ window.onload = function() {
 };
 
 let geojsonObject; //The object that will store the loaded GeoJSON
-
-let styleCache = {}; //An object to store the feature styles for efficiency
 let vectorLayer; //Declaring the vectorLayer here so that it can be used by all the functions
 
+let styleCache = {}; //An object to store the feature styles for efficiency
 //A function that is used to select the appropriate style for the feature based on its type
 const styleFunction = function(feature) {
     let featureType = feature.get('type');
@@ -142,9 +141,9 @@ function createDataSource() {
 
     //Generating an information box at the top of the application
     document.getElementById('action-alert').style.display = 'block';
-    document.getElementById('action-alert').message = 'The GeoJSON network file has been uploaded successfully. Now you ' +
-        'can interact with the map and its features, as well as view generic network information in the sidebar. If ' +
-        'you have a JSON file with real-time data, you can upload it using the Upload Real-Time Data button.';
+    document.getElementById('action-alert').message = `The GeoJSON network file has been uploaded successfully. Now you
+        can interact with the map and its features, as well as view generic network information in the sidebar. If
+        you have a JSON file with real-time data, you can upload it using the Upload Real-Time Data button.`;
     document.getElementById('network-legend').style.display = 'block';
 
     generateInfo(vectorLayer);
@@ -194,10 +193,10 @@ function linkRealTimeData(data) {
 
     //Once the data is linked, an information box is shown which tells the user what they've done.
     document.getElementById('real-time-alert').style.display = 'block';
-    document.getElementById('real-time-alert').message = 'The real-time network readings have been uploaded and linked ' +
-        'to the static network successfully. You may now play through the data and see how the network changes. The ' +
-        'slider at the bottom of the map can be used to go to specific hours in the day, and the Reset Network button ' +
-        'can be used to return the network to its original state';
+    document.getElementById('real-time-alert').message = `The real-time network readings have been uploaded and linked 
+        to the static network successfully. You may now play through the data and see how the network changes. The 
+        slider at the bottom of the map can be used to go to specific hours in the day, and the Reset Network button
+        can be used to return the network to its original state`;
 }
 
 let realTimeData; //A variable to store the real-time JSON data that is uploaded

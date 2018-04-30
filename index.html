@@ -154,10 +154,10 @@
         let feature = map.forEachFeatureAtPixel(e.pixel, function(feat) {return feat;});
 
         if(feature) {
-            content.innerHTML = '<p>Feature Type: ' + feature.get('type') + '</p>' + '<p>Feature ID: ' + feature.get('id') + '</p>';
+            content.innerHTML = `<p>Feature Type: ${feature.get('type')}</p> <p>Feature ID: ${feature.get('id')}</p>`;
             //Real-time data is shown in the popover if the feature has it.
             if(feature.get('realTimeData')) {
-                content.insertAdjacentHTML('beforeend', '<p>Real Time Data: ' + feature.get('realTimeData'));
+                content.insertAdjacentHTML('beforeend', `<p>Real Time Data: ${feature.get('realTimeData')}`);
             }
             overlay.setPosition(e.coordinate);
         }
@@ -220,6 +220,7 @@
 
 <div id="footer">
     <p id="footer-text">Vladislav Romanov (University of Exeter)</p>
+    <p id="license-text">Icons provided by Font Awesome, used via the CC BY 4.0 license (https://creativecommons.org/licenses/by/4.0/)</p>
 </div>
 
 

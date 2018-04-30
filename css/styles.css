@@ -123,6 +123,16 @@ px-spinner {
     color: white;
     top: 10%;
 }
+
+#license-text {
+    position: absolute;
+    font-family: "Times New Roman";
+    left: 3%;
+    width: 40%;
+    font-size: 12px;
+    color: white;
+    top: 10%;
+}
 #sidebar {
     position: absolute;
     top: 10%;
