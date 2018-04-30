@@ -1,4 +1,5 @@
 # Essential pre-requisites
+- You must have be connected to the internet - the application needs to load the map tiles from the internet.
 - You need to have NodeJS installed (https://nodejs.org/en/)
 - You need to have the http-server node module installed globally (npm install http-server -g)
 
